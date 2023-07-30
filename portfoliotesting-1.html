@@ -1,0 +1,657 @@
+<html lang="en">
+  <head>
+    <!-- Font Awesome -->
+    <!-- Font Awesome -->
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Kevin Coleman's Portfolio</title>
+    <style>
+      .imageContainer {
+        display: flex;
+        align-items: flex-start;
+      }
+      .contactmeContainer{
+        display: flex;
+        align-items:flex-start;
+      }
+      
+      .lighthouse-image {
+        width: 700px;
+        height: 400px;
+        display: none; /* Hide images by default */
+      }
+      
+      .light-mode .lighthouse-light {
+        display: block; /* Show light image in light mode */
+      }
+      
+      .dark-mode .lighthouse-dark {
+        display: block; /* Show dark image in dark mode */
+      }
+      
+      .light-mode {
+        background-color: white;
+        color: black;
+      }
+      
+
+                .dark-mode {
+                    background-color: black;
+                    color: white;
+                }
+                  .outlined-text {
+                    color: white;
+                    text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+                  }
+                  .outlined-text-inverse {
+                    color: black;
+                    text-shadow: -1px 0 white, 0 1px white, 1px 0 white, 0 -1px white;
+                  }
+
+                    svg {
+                      width: 32px;
+                      height: 32px;
+                      fill: currentColor;
+                    }
+
+                  nav li a[href="portfoliotesting.html"] {
+                    background-color: #0033e2;
+                    color: #ffffff;
+                    text-decoration: underline;
+                    border-radius: 5px
+                  }
+
+
+                 .lamp {
+              position: absolute;
+              z-index: -1;
+              border-radius: 25%;
+              box-shadow: 0px 0px 75px 75px #00CC66;
+              pointer-events: none;
+              opacity: 15;
+              transition: transform 0.2s ease;
+              transform: translate(-100%, -100%) scale(1);
+
+            }
+                  #cursor {
+                    position: fixed;
+                    top: 0;
+                    left: 0;
+                    width: 2rem;
+                    height: 2rem;
+                    border-radius: 50%;
+                    border: .125rem solid white;
+                    pointer-events: none;
+                    z-index: 9999;
+
+                  }
+
+                  img:hover {
+
+
+                  }
+
+                  a:focus,
+                  button:focus {
+                    background-color: #00CC66;
+                    background: linear-gradient(90deg, #00CC66 0%, #00CC66 100%) !important;
+                    border: .125rem solid white;
+                  }
+
+
+                  .project-container {
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                  }
+
+                  .project-grid {
+                    display: flex;
+                    flex-wrap: wrap;
+                    justify-content: center;
+                    margin: 1.25rem 0;
+                  }
+
+                  .project-item {
+                    margin: 0 1.25rem;
+                  }
+
+                  body {
+                    background-color: #000000;
+                    color: #ffffff;
+                    font-size: 1rem;
+                    font-family: Arial, sans-serif;
+                    margin: 0;
+                    padding: 0;
+                  }
+
+                  .light-mode {
+                    background-color: rgb(249, 249, 249);
+                    color: rgb(0, 0, 0);
+                  }
+
+                  header {
+                    color: #fff !important;
+                    border: unset !important;
+                    background: linear-gradient(90deg, #0033e2 0%, #00CC66 100%) !important;
+                    padding: .125rem;
+                  }
+
+                  header h1 {
+                    margin: 0;
+                    font-size: 2.25rem;
+                    font-weight: bold;
+                    text-align: center;
+                    color: #ffffff;
+                  }
+
+                  nav {
+                    float: right;
+                  }
+
+                  nav ul {
+                    list-style: none;
+                    margin: 0;
+                    padding: 0;
+                  }
+
+                  nav li {
+                    display: inline-block;
+                    margin-left: 1.25rem;
+                  }
+
+                  nav li a {
+                    color: #ffffff;
+                    text-decoration: none;
+                    font-size: 1.25rem;
+                    font-weight: bold;
+                    text-transform: uppercase;
+                    transition: color 0.3s ease;
+                  }
+
+                  .light-mode nav li a {
+                    color: #000000;
+                  }
+
+                  button {
+                    background-color: transparent;
+                    border: none;
+                    color: #ffffff;
+                    text-decoration: none;
+                    font-size: 1.25rem;
+                    font-weight: bold;
+                    text-transform: uppercase;
+                    transition: color 0.3s ease;
+                    cursor: pointer;
+                  }
+
+                  .light-mode button {
+                    color: #000000;
+                  }
+
+                  button:hover {
+                    background-color: #00CC66;
+                    border-radius: 5px;
+                  }
+
+                  .container {
+                    max-width: 75rem;
+                    margin: 0 auto;
+                    padding: 1.25rem;
+                  }
+
+                  .project-grid {
+                    display: grid;
+                    grid-template-columns: repeat(2, 1fr);
+                    grid-gap: .313rem;
+                    margin-bottom: 2.5rem;
+                  }
+
+                  .project-grid a {
+                    display: flex 1 1 auto;
+                    ;
+                    background-color: #ffffff;
+                    color: #212121;
+                    text-decoration: none;
+                    padding: 1.25rem;
+                    border-radius: .625rem;
+                    box-shadow: 0 0 .625rem rgba(0, 0, 0, 0.2);
+                    transition: transform 0.3s ease;
+                  }
+
+                  .project-grid a:hover {
+                    background-color: #00CC66;
+                    transform: translateY(-.188rem);
+                  }
+
+                  nav li a:hover {
+                    background-color: #00CC66;
+                    border-radius: 5px;
+                  }
+
+                  footer {
+                    color: #fff !important;
+                    border: unset !important;
+                    margin: 1;
+                    padding: 1.0rem !important;
+                    background: linear-gradient(90deg, #0033e2 0%, #00CC66 100%) !important;
+                    width: 100%;
+                    display: block;
+                    position: fixed;
+                    bottom: 0;
+                    left: 0;
+                  }
+
+                  nav footer a:hover {
+                    background-color: #00CC66;
+                    border-radius: 5px
+                  }
+
+                  footer a:hover {
+                    color: #00CC66;
+                    border-radius: 5px
+                  }
+                  #buttons {
+                    list-style-type: none;
+                    padding: 0;
+                    margin: 0;
+                    display: flex;
+                  }
+                  #buttons li {
+                    margin-right: 20px; /* Adjust this value to change the spacing between menu items */
+                  }
+
+                  #buttons li:last-child {
+                    margin-right: 0;
+                  }
+
+                  #buttons a,
+                  #buttons button {
+                    text-decoration: none;
+                    color: inherit;
+                  }
+                  .imageContainer{
+                   
+                   width: 50%;
+                   height: 250px;
+                  }
+                  .imageContactContainer{
+                   width: 100%;
+
+                   display: flex;
+                   justify-content: space-between;
+                  }
+
+                  .icons{
+                   display: flex;
+
+      justify-content:space-between;
+                   align-items: center;
+                  }
+                  .LinkedIn{
+                    display: flex;
+
+                  }
+                  .linkedinphrase{
+                    margin-top: 10px;
+                    margin-left: 5px;
+                  }
+    </style>
+  </head>
+  <body>
+    <header role="banner">
+      <h1>Portfolio</h1>
+      <nav role="navigation">
+        <ul id="buttons">
+          <li>
+            <a
+              href="portfoliotesting.html"
+              tabindex="1"
+              accesskey="1"
+              class="outlined-text"
+              >Home</a
+            >
+          </li>
+          <li>
+            <a
+              href="About_Me.html"
+              tabindex="2"
+              accesskey="2"
+              class="outlined-text"
+              >About</a
+            >
+          </li>
+          <button
+            onclick="lightMode()"
+            tabindex="3"
+            accesskey="3"
+            class="outlined-text"
+          >
+            Lightmode
+          </button>
+        </ul>
+      </nav>
+    </header>
+    <div class="container">
+      <h2>Featured Projects</h2>
+      <div class="project-grid">
+        <a
+          href="project_1.html"
+          title="Brief description of Project 1"
+          tabindex="4"
+          accesskey="4"
+        >
+          <svg
+            class="logo-remote"
+            viewBox="0 0 24 24"
+            width="24"
+            height="24"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <rect
+              x="6"
+              y="3"
+              width="12"
+              height="18"
+              rx="2"
+              ry="2"
+              stroke="currentColor"
+              fill="none"
+              stroke-width="2"
+            />
+            <circle cx="12" cy="8" r="1" fill="currentColor" />
+            <circle cx="12" cy="12" r="1" fill="currentColor" />
+            <circle cx="12" cy="16" r="1" fill="currentColor" />
+          </svg>
+
+          Door Unlock Shortcut
+        </a>
+        <a
+          href="project_2clock.html"
+          title="Brief description of Project 2"
+          tabindex="5"
+          accesskey="5"
+        >
+          <svg
+            class="logo-clock"
+            viewBox="0 0 24 24"
+            width="24"
+            height="24"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <circle
+              cx="12"
+              cy="12"
+              r="10"
+              stroke="currentColor"
+              fill="none"
+              stroke-width="2"
+            />
+            <line
+              x1="12"
+              y1="12"
+              x2="12"
+              y2="6"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+            />
+            <line
+              x1="12"
+              y1="12"
+              x2="16"
+              y2="12"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+            />
+          </svg>
+
+          Hand Detection to Announce Time
+        </a>
+        <a
+          href="Accessibility_Audit.html"
+          title="Brief description of Project 3"
+          tabindex="6"
+          accesskey="6"
+        >
+          <svg
+            class="icon-search"
+            viewBox="0 0 24 24"
+            width="24"
+            height="24"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <circle
+              cx="10"
+              cy="10"
+              r="7"
+              stroke="currentColor"
+              stroke-width="2"
+              fill="none"
+            />
+            <path
+              d="M20 20l-4.5-4.5"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+            />
+          </svg>
+
+          Accessibility Audit
+        </a>
+        <a
+          href="Lifespan_BCI.html"
+          title="Brief description of Project 4"
+          tabindex="7"
+          accesskey="7"
+        >
+          <svg
+            class="icon-lightbulb"
+            viewBox="0 0 24 24"
+            width="24"
+            height="24"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M12 2C8.1 2 5 5.1 5 9C5 11.32 6.17 13.27 8 14.26V17C8 17.55 8.45 18 9 18H10V21C10 21.55 10.45 22 11 22H13C13.55 22 14 21.55 14 21V18H15C15.55 18 16 17.55 16 17V14.26C17.83 13.27 19 11.32 19 9C19 5.1 15.9 2 12 2Z"
+              stroke="currentColor"
+              stroke-width="2"
+              fill="none"
+            />
+          </svg>
+
+          Lifespan Brain Computer Interface
+        </a>
+      </div>
+      <body class="dark-mode">
+        <!-- Default to dark mode -->
+        <div class="imageContactContainer">
+          <div class="imageContainer">
+            <img
+              id="lighthouse-light"
+              class="lighthouse-image lighthouse-light"
+              src="images/img-1.jpeg"
+              width="14000"
+              height="9100"
+              alt="Image of a lighthouse, symbolizing my main technology stack which consists of HTML, CSS, Javascript, and Python. I am also familiar with various frameworks such as Node and React."
+            />
+            <img
+              id="lighthouse-dark"
+              class="lighthouse-image lighthouse-dark"
+              src="images/img-2.jpeg"
+              width="14000"
+              height="9100"
+              alt="Image of a lighthouse, symbolizing my main technology stack which consists of HTML, CSS, Javascript, and Python. I am also familiar with various frameworks such as Node and React."
+            />
+          </div>
+          <div class="contactContainer">
+            <!-- <div id="about" class="container"> -->
+            <h2>Contact Me</h2>
+            <p class="about-info" tabindex="12">Kevin Coleman</p>
+            <p class="about-info" tabindex="13">Email: colemanke1@berea.edu</p>
+            <p class="about-info" tabindex="14">Phone: (989)-313-9464</p>
+            <p class="about-info" tabindex="15"></p>
+            <div class="icons">
+              <div class="LinkedIn">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 24 24"
+                  fill="white"
+                  focusable="false"
+                >
+                  <path
+                    d="M22.225 0h-20.45c-.983 0-1.774.791-1.774 1.775v20.449c0 .983.791 1.776 1.774 1.776h20.45c.983 0 1.775-.793 1.775-1.776v-20.449c0-.984-.792-1.775-1.775-1.775zm-14.67 20.336h-2.872v-11.617h2.872v11.617zm-1.436-13.232c-.921 0-1.671-.75-1.671-1.67s.75-1.671 1.671-1.671c.921 0 1.671.75 1.671 1.671s-.75 1.67-1.671 1.67zm12.743 13.232h-2.872v-5.656c0-1.35-.484-2.27-1.697-2.27-.926 0-1.478.625-1.72 1.23-.089.215-.111.515-.111.817v5.879h-2.87s.037-9.542 0-10.511h2.87v1.49c.382-.589 1.064-1.427 2.594-1.427 1.89 0 3.316 1.23 3.316 3.89v6.558z"
+                  />
+                </svg>
+                <div class="linkedinphrase">LinkedIn</div>
+              </div>
+              <div class="LinkedIn">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 24 24"
+                  fill="white"
+                  focusable="false"
+                >
+                  <path
+                    d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61-.546-1.385-1.335-1.755-1.335-1.755-1.09-.745.08-.73.08-.73 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.47-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.4 3-.405 1.02.005 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.235 1.91 1.235 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.6-.015 2.885-.015 3.285 0 .32.22.695.825.577C20.565 22.092 24 17.593 24 12.297c0-6.627-5.373-12-12-12"
+                  />
+                </svg>
+                <div class="linkedinphrase">Github</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- </div> -->
+        <!--         
+         <div class="container"> -->
+
+        <script>
+          function lightMode() {
+            var element = document.body;
+            element.classList.toggle("light-mode");
+
+            toggleMode(); // Call toggleMode() function inside lightMode()
+          }
+
+          function toggleMode() {
+            var lightImageElement = document.getElementById("lighthouse-light");
+            var darkImageElement = document.getElementById("lighthouse-dark");
+
+            if (document.body.classList.contains("light-mode")) {
+              lightImageElement.style.display = ""; // Show light image
+              darkImageElement.style.display = "none"; // Hide dark image
+            } else {
+              lightImageElement.style.display = "none"; // Hide light image
+              darkImageElement.style.display = ""; // Show dark image
+            }
+          }
+        </script>
+
+        <script>
+          // Get all focusable elements in the form
+          const formElements = document.querySelectorAll(
+            'input, button, select, textarea, [tabindex]:not([tabindex="-1"])'
+          );
+          // Add a "keydown" event listener to the document
+          document.addEventListener("keydown", (event) => {
+            // Check if the user pressed the "Tab" key
+            if (event.key === "Tab") {
+              // Prevent the default tab behavior
+              event.preventDefault();
+              // Get the currently focused element
+              const currentElement = document.activeElement;
+              // Find the index of the currently focused element in the list of form elements
+              const currentIndex =
+                Array.from(formElements).indexOf(currentElement);
+              // Calculate the index of the next element to focus on
+              const nextIndex = (currentIndex + 1) % formElements.length;
+              // Wait for the next event loop cycle to ensure that the element has been fully focused
+              setTimeout(() => {
+                // Focus on the next element
+                formElements[nextIndex].focus();
+              }, 700);
+            }
+            // Check if the key is '1' and not in an input or textarea
+            if (
+              event.key === "1" &&
+              event.target.tagName !== "INPUT" &&
+              event.target.tagName !== "TEXTAREA"
+            ) {
+              event.preventDefault(); // Prevent any default behavior
+              document.getElementById("home-link").click(); // Trigger the click event for the "Home" link
+            }
+            // Check if the key is '2' and not in an input or textarea
+            if (
+              event.key === "2" &&
+              event.target.tagName !== "INPUT" &&
+              event.target.tagName !== "TEXTAREA"
+            ) {
+              event.preventDefault(); // Prevent any default behavior
+              document.getElementById("about-link").click(); // Trigger the click event for the "About Me" link
+            }
+          });
+          var delay = 100; // milliseconds
+          var intervalId;
+          var focusedElement;
+
+          function startNavigation(event) {
+            if (event.keyCode === 9) {
+              // Tab key
+              clearInterval(intervalId);
+              intervalId = setInterval(navigate, delay);
+              focusedElement = event.target;
+            }
+          }
+
+          function stopNavigation(event) {
+            if (event.keyCode === 9) {
+              // Tab key
+              clearInterval(intervalId);
+              focusedElement = null;
+            }
+          }
+
+          function navigate() {
+            var nextElement = focusedElement.nextElementSibling;
+            if (!nextElement) {
+              nextElement = focusedElement.parentNode.firstElementChild;
+            }
+            nextElement.focus();
+            focusedElement = nextElement;
+          }
+          document.addEventListener("keydown", startNavigation);
+          document.addEventListener("keyup", stopNavigation);
+        </script>
+        <div class="lamp"></div>
+        <script>
+          var lamp = document.querySelector(".lamp");
+          lamp.style.position = "absolute"; //Ensures that the lamp is positioned correctly
+
+          document.addEventListener("mouseover", function (event) {
+            lamp.style.display = "block";
+          });
+
+          document.addEventListener("mouseout", function (event) {
+            lamp.style.display = "none";
+          });
+
+          document.addEventListener("mousemove", function (event) {
+            if (lamp.style.display === "block") {
+              lamp.style.left = event.clientX + window.scrollX + "px";
+              lamp.style.top = event.clientY + window.scrollY + "px";
+            }
+            document.addEventListener("mousedown", function (event) {
+              lamp.style.transform = "translate(-100%, -100%) scale(1.2)";
+            });
+
+            document.addEventListener("mouseup", function (event) {
+              lamp.style.transform = "translate(-100%, -100%) scale(1)";
+            });
+          });
+        </script>
+      </body>
+    </div>
+  </body>
+</html>

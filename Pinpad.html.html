@@ -1,0 +1,651 @@
+<!DOCTYPE html>
+<html>
+  <style> 
+    #custom-modal {
+       position: fixed;
+       top: 50%;
+       left: 50%;
+       transform: translate(-50%, -50%);
+       background-color: #0033e2; /* blue */
+       width: 40%;
+       height: 40%;
+       padding: 1.25rem;
+       border-radius: 0.5rem;
+       box-shadow: 0 0 0.625rem 0 #0033e2;
+       overflow: auto; /* add this to enable scroll if content exceeds the height */
+   }
+    
+     svg text {
+       fill: #00CC66;
+   }
+   
+       .light-mode {
+         background-color: white;
+         color: black;
+     }
+   
+     .dark-mode {
+         background-color: black;
+         color: white;
+     }
+       .outlined-text {
+         color: white;
+         text-shadow: -0.0625rem 0 black, 0 0.0625rem black, 0.0625rem 0 black, 0 -0.0625rem black;
+       }
+       .outlined-text-inverse {
+         color: black;
+         text-shadow: -0.0625rem 0 white, 0 0.0625rem white, 0.0625rem 0 white, 0 -0.0625rem white;
+       }
+   
+       nav li a[href="portfoliotesting.html"] {
+         background-color: #0033e2;
+         color: #ffffff;
+         text-decoration: underline;
+         border-radius: 0.3125rem;
+       }
+      .lamp {
+   position: absolute;
+   z-index: -1;
+   border-radius: 1.5625rem;
+   box-shadow: 0 0 4.6875rem 4.6875rem #00CC66;
+   pointer-events: none;
+   opacity: 15;
+   transition: transform 0.2s ease;
+   transform: translate(-100%, -100%) scale(1);
+   }
+       #cursor {
+         position: fixed;
+         top: 0;
+         left: 0;
+         width: 2rem;
+         height: 2rem;
+         border-radius: 50%;
+         border: 0.0078125rem solid white;
+         pointer-events: none;
+         z-index: 9999;
+       }
+   
+       a:focus,
+       button:focus {
+         background-color: #00CC66;
+         background: linear-gradient(90deg, #00CC66 0%, #00CC66 100%) !important;
+         border: 0.0078125rem solid white;
+       }
+   
+       .project-container {
+         display: flex;
+         flex-direction: column;
+         align-items: center;
+       }
+   
+       .project-grid {
+         display: flex;
+         flex-wrap: wrap;
+         justify-content: center;
+         margin: 1.25rem 0;
+       }
+   
+       .project-item {
+         margin: 0 1.25rem;
+       }
+   
+       body {
+         background-color: #000000;
+         color: #ffffff;
+         font-size: 1rem;
+         font-family: Arial, sans-serif;
+         margin: 0;
+         padding: 0;
+       }
+   
+       .light-mode {
+         background-color: rgb(249, 249, 249);
+         color: rgb(0, 0, 0);
+       }
+   
+       header {
+         color: #fff !important;
+         border: unset !important;
+         background: linear-gradient(90deg, #0033e2 0%, #00CC66 100%) !important;
+         padding: 0.0078125rem;
+       }
+   
+       header h1 {
+         margin: 0;
+         font-size: 2.25rem;
+         font-weight: bold;
+         text-align: center;
+         color: #ffffff;
+       }
+   
+       nav {
+         float: right;
+       }
+   
+       nav ul {
+         list-style: none;
+         margin: 0;
+         padding: 0;
+       }
+   
+       nav li {
+         display: inline-block;
+         margin-left: 1.25rem;
+       }
+   
+       nav li a {
+         color: #ffffff;
+         text-decoration: none;
+         font-size: 1.25rem;
+         font-weight: bold;
+         text-transform: uppercase;
+         transition: color 0.3s ease;
+       }
+   
+       .light-mode nav li a {
+         color: #000000;
+       }
+   
+       button {
+         background-color: transparent;
+         border: none;
+         color: #ffffff;
+         text-decoration: none;
+         font-size: 1.25rem;
+         font-weight: bold;
+         text-transform: uppercase;
+         transition: color 0.3s ease;
+         cursor: pointer;
+       }
+   
+       .light-mode button {
+         color: #000000;
+       }
+   
+       button:hover {
+         background-color: #00CC66;
+         border-radius: 0.3125rem; 
+       }
+   
+       .container {
+         max-width: 75rem;
+         margin: 0 auto;
+         padding: 1.25rem;
+       }
+   
+       .project-grid {
+         display: grid;
+         grid-template-columns: repeat(2, 1fr);
+         grid-gap: 0.01953125rem;
+         margin-bottom: 2.5rem;
+       }
+   
+       .project-grid a {
+         display: flex 1 1 auto;
+         background-color: #ffffff;
+         color: #212121;
+         text-decoration: none;
+         padding: 1.25rem;
+         border-radius: 0.0390625rem;
+         box-shadow: 0 0 0.0390625rem rgba(0, 0, 0, 0.2);
+         transition: transform 0.3s ease;
+       }
+   
+       .project-grid a:hover {
+         background-color: #00CC66;
+         transform: translateY(-0.01171875rem);
+       }
+   
+       nav li a:hover {
+         background-color: #00CC66;
+         border-radius: 0.3125rem; 
+       }
+   
+       footer {
+         color: #fff !important;
+         border: unset !important;
+         background: linear-gradient(90deg, #0033e2 0%, #00CC66 100%) !important;
+         padding: 0.0078125rem;
+       }
+   
+       nav footer a:hover {
+         background-color: #00CC66;
+         border-radius: 0.3125rem;
+       }
+   
+       footer a:hover {
+         color: #00CC66;
+         border-radius: 0.3125rem;
+       }
+       #buttons {
+         list-style-type: none;
+         padding: 0;
+         margin: 0;
+         display: flex;
+       }
+       #buttons li {
+         margin-right: 1.25rem; /* Adjust this value to change the spacing between menu items */
+       }
+     
+   </style>
+   
+   <style>
+
+    .confetti {
+        position: absolute;
+        z-index: 9999;
+        pointer-events: none;
+        animation-name: fall;
+        animation-timing-function: linear;
+        animation: fall 10s linear infinite;
+    
+    }
+    
+    @keyframes fall {
+        0% {
+            transform: translateY(0%) rotate(0deg);
+        }
+        100% {
+            transform: translateY(100vh) rotate(360deg);
+        }
+    }
+    
+    #realPinInput {
+    width: 18.75rem;
+    height: 2.5rem;
+    font-size: clamp(1.5rem, 1.5vw, 2rem);
+    border-radius: 0.625rem;
+}
+    
+    .active {
+        fill: #0033e2;
+    }
+    
+    .pinpad-wrapper {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        background-color: #fff;
+        border-radius: 0.625rem;
+    }
+    
+    .pinpad-container {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 0.625rem;
+        justify-content: center;
+        align-items: center;
+        padding: 1.25rem;
+        background-color: #fff;
+        border-radius: 0.625rem;
+        box-shadow: 0 0.3125rem 0.625rem rgba(0, 0, 0, 0.3);
+    }
+    
+    .button {
+        background: linear-gradient(to right, #0099ff 0%, #66ccff 100%);
+        border: none;
+        color: white;
+        padding: 0.9375rem 2rem;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 1rem;
+        margin: 0.25rem 0.125rem;
+        cursor: pointer;
+        border-radius: 0.75rem;
+        transition: 0.3s;
+    }
+    
+    .button:hover {
+        background: linear-gradient(to right, #66ccff 0%, #0099ff 100%);
+    }
+    
+    .pinpad-row {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    
+    .button {
+        position: relative;
+        display: inline-block;
+        margin: 0.3125rem;
+        width: 3.125rem;
+        height: 3.125rem;
+        line-height: 3.125rem;
+        text-align: center;
+        border: 0.0625rem solid #999;
+        background: linear-gradient(to bottom right, #ddd, #bbb);
+        box-shadow: 0.125rem 0.125rem 0.3125rem rgba(0, 0, 0, 0.1);
+        border-radius: 0.3125rem;
+        overflow: hidden;
+        transition: 0.3s all;
+        color: #333;
+        font-weight: bold;
+        cursor: pointer;
+        font-family: 'Roboto', sans-serif;
+    }
+    
+    .button:before {
+        content: "";
+        position: absolute;
+        top: -50%;
+        left: -50%;
+        width: 200%;
+        height: 200%;
+        background: radial-gradient(circle at top left, rgba(255, 255, 255, 0.5), transparent);
+        transform: rotate(-45deg);
+    }
+    
+    .button:active {
+      transform: scale(0.9); /* Scale the button down to 90% when clicked */
+    box-shadow: none; /* Optionally remove box shadow when clicked */
+}
+    
+    #letterP,
+    #letterI,
+    #letterN,
+    #letterP2,
+    #letterA,
+    #letterD {
+        fill: blue;
+    }
+
+    #fakePinPad {
+    display: flex;
+    flex-wrap: wrap;
+    width: 18.75rem;
+    justify-content: space-around;
+}
+    
+    #fakePinPad button {
+        width: 5rem;
+        height: 5rem;
+        margin: 0.625rem;
+        font-size: clamp(1.5rem, 1.5vw, 2rem);
+        border-radius: 0.9375rem;
+        border: none;
+        background-color: #ddd;
+        cursor: pointer;
+        box-shadow: 0 0.125rem 0.25rem 0 rgba(0, 0, 0, 0.2), 0 0.1875rem 0.625rem 0 rgba(0, 0, 0, 0.19);
+        transition: box-shadow 0.3s ease-in-out;
+    }
+    
+    #fakePinPad button:hover {
+        box-shadow: 0 0.3125rem 0.9375rem rgb(0, 0, 0);
+    }
+    
+    #realPinPad {
+    display: none;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    justify-content: center;
+    align-items: center;
+    width: 18.75rem;
+    padding: 1.25rem;
+    color: #00CC66;
+    background-color: #000000;
+    border-radius: 0.625rem;
+    box-shadow: 0 0.125rem 0.25rem 0 rgb(255, 255, 255), 0 0.1875rem 0.625rem 0 rgba(255, 255, 255, 0);
+    transition: box-shadow 0.3s ease-in-out;
+}
+    
+    #realPinPad button {
+        width: 5rem;
+        height: 5rem;
+        margin: 0.625rem;
+        font-size: clamp(1.5rem, 1.5vw, 2rem);
+        border-radius: 0.9375rem;
+        border: none;
+        background-color: #90ee90;
+        cursor: pointer;
+    }
+    
+    #realPinPad button:hover {
+        background-color: #32cd32;
+        box-shadow: 0 0.125rem 0.25rem 0 rgb(255, 255, 255), 0 0.1875rem 0.625rem 0 rgba(255, 255, 255, 0);
+        transition: box-shadow 0.3s ease-in-out;
+    }
+    
+    </style>
+    
+  <div id="confetti"></div>
+
+  <body>
+    <header>
+      <h1>Secret Button Pinpad</h1>
+      <nav role="navigation">
+        <ul id="buttons">
+          <li>
+            <a href="portfoliotesting.html" tabindex="1" accesskey="1" class="outlined-text">Home</a>
+          </li>
+          <li>
+            <a href="About_Me.html" tabindex="2" accesskey="2" class="outlined-text">About</a>
+          </li>
+          <button onclick="lightMode()" tabindex="3" accesskey="3" class="outlined-text">Lightmode</button>
+        </ul>        
+      </nav>
+    </header>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+
+<!-- Secret Buttons -->
+<svg id="pButton1" width="30" height="30" onclick="clickButton('P1')" role="img" aria-label="P Letter Image 1" tabindex="4">
+  <text x="0" y="20" font-size="20px" font-family="Verdana">P</text>
+</svg>
+<svg id="iButton" width="30" height="30" onclick="clickButton('I')" role="img" aria-label="I Letter Image" tabindex="5">
+  <text x="0" y="20" font-size="20px" font-family="Verdana">I</text>
+</svg>
+<svg id="nButton" width="30" height="30" onclick="clickButton('N')" role="img" aria-label="N Letter Image" tabindex="6">
+  <text x="0" y="20" font-size="20px" font-family="Verdana">N</text>
+</svg>
+<svg id="pButton2" width="30" height="30" onclick="clickButton('P2')" role="img" aria-label="P Letter Image 2" tabindex="7">
+  <text x="0" y="20" font-size="20px" font-family="Verdana">P</text>
+</svg>
+<svg id="aButton" width="30" height="30" onclick="clickButton('A')" role="img" aria-label="A Letter Image" tabindex="8">
+  <text x="0" y="20" font-size="20px" font-family="Verdana">A</text>
+</svg>
+<svg id="dButton" width="30" height="30" onclick="clickButton('D')" role="img" aria-label="D Letter Image" tabindex="9">
+  <text x="0" y="20" font-size="20px" font-family="Verdana">D</text>
+</svg>
+
+
+<div>
+  <input type="text" id="realPinInput" tabindex="10" readonly>
+  <button id="resetButton" tabindex="10">Reset</button>
+</div>
+
+<!-- Fake PinPad -->
+<div id="fakePinPad">
+  <button type="button" tabindex="11">1</button>
+  <button type="button" tabindex="12">2</button>
+  <button type="button" tabindex="13">3</button>
+  <button type="button" tabindex="14">4</button>
+  <button type="button" tabindex="15">5</button>
+  <button type="button" tabindex="16">6</button>
+  <button type="button" tabindex="17">7</button>
+  <button type="button" tabindex="18">8</button>
+  <button type="button" tabindex="19">9</button>
+</div>
+
+<!-- Real PinPad -->
+<div id="realPinPad" style="display: none;">
+  <button type="button" onclick="enterPin(1)" tabindex="11">1</button>
+  <button type="button" onclick="enterPin(2)" tabindex="12">2</button>
+  <button type="button" onclick="enterPin(3)" tabindex="13">3</button>
+  <button type="button" onclick="enterPin(4)" tabindex="14">4</button>
+  <button type="button" onclick="enterPin(5)" tabindex="15">5</button>
+  <button type="button" onclick="enterPin(6)" tabindex="16">6</button>
+  <button type="button" onclick="enterPin(7)" tabindex="17">7</button>
+  <button type="button" onclick="enterPin(8)" tabindex="18">8</button>
+  <button type="button" onclick="enterPin(9)" tabindex="19">9</button>
+</div>
+
+
+<div id="custom-modal" role="dialog" aria-labelledby="dialog-label" aria-describedby="dialog-desc" >
+  <div class="modal-content">
+    <h2 id="dialog-label" tabindex="20">Welcome!</h2>
+    <p id="dialog-desc" tabindex="21">Secret Buttons Protect the Pinpad from "Bots." Please follow these instructions to reveal the confetti:</p>
+    <ol>
+      <li tabindex="22">Click "P" twice and "A" three times. This will activate the Pinpad.</li>
+      <li tabindex="23">Enter "123" on the Pinpad. Make sure to follow the sequence correctly.</li> 
+      <li tabindex="24">Enjoy the confetti! This confirms the correct input.</li> 
+    </ol>
+  </div>
+</div>
+
+  
+  
+<script>
+  let pin = "";
+  let buttonClicks = { P1: 0, I: 0, N: 0, P2: 0, A: 0, D: 0 };
+  
+  function enterPin(num) {
+    if (pin.length < 4) {
+      pin += num;
+
+      let maskedPin = "*".repeat(pin.length);
+      document.getElementById('realPinInput').value = maskedPin;
+
+      checkPin();
+    }
+  }
+
+  function clickButton(buttonId) {
+    buttonClicks[buttonId]++;
+    if (buttonClicks['P1'] === 2) {
+      document.getElementById('pButton1').querySelector('text').classList.add('active');
+    }
+    if (buttonClicks['A'] === 3) {
+      document.getElementById('aButton').querySelector('text').classList.add('active');
+    }
+    if (buttonClicks['P1'] === 2 && buttonClicks['A'] === 3) {
+      togglePinPads();
+    }
+  }
+
+  function togglePinPads() {
+    document.getElementById('fakePinPad').style.display = 'none';
+    document.getElementById('realPinPad').style.display = 'grid';
+    document.getElementById('realPinPad').classList.add('active');
+  }
+
+  function resetPin() {
+    pin = "";
+    document.getElementById('realPinInput').value = "";
+    buttonClicks = { P1: 0, I: 0, N: 0, P2: 0, A: 0, D: 0 };
+    document.getElementById('pButton1').querySelector('text').classList.remove('active');
+    document.getElementById('aButton').querySelector('text').classList.remove('active');
+    document.getElementById('realPinPad').style.display = 'none';
+    document.getElementById('fakePinPad').style.display = 'grid';
+    document.getElementById('realPinPad').classList.remove('active');
+  }
+
+  document.getElementById('resetButton').addEventListener('click', resetPin);
+
+  function createConfetti() {
+    var colors = ['#000', '#888', '#bbb', '#fff'];
+    var wrapper = document.getElementById('confetti');
+    
+    for (var i = 0; i < 30; i++) {
+      var confetti = document.createElement('div');
+      confetti.className = 'confetti';
+      confetti.style.top = Math.random() * 100 + '%';
+      confetti.style.left = Math.random() * 100 + '%';
+      confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+      confetti.style.transform = 'rotate(' + Math.random() * 360 + 'deg)';
+      confetti.style.width = Math.random() * 10 + 'px';
+      confetti.style.height = confetti.style.width;
+      confetti.style.animationDuration = Math.random() * 10 + 10 + 's';
+      confetti.style.animationDelay = Math.random() + 's';
+      
+      wrapper.appendChild(confetti);
+    }
+  }
+
+  function checkPin() {
+    if (pin === '123') {
+      createConfetti();
+      pin = "";
+      document.getElementById('realPinInput').value = "";
+    }
+  }
+</script>
+
+<script>
+  function lightMode() {
+    var element = document.body;
+    element.classList.toggle("light-mode");
+  }
+
+
+
+  var delay = 100;
+  var intervalId;
+  var focusedElement;
+
+  function startNavigation(event) {
+    if (event.keyCode === 9) {
+      clearInterval(intervalId);
+      intervalId = setInterval(navigate, delay);
+      focusedElement = event.target;
+    }
+  }
+
+  function stopNavigation(event) {
+    if (event.keyCode === 9) {
+      clearInterval(intervalId);
+      focusedElement = null;
+    }
+  }
+
+  function navigate() {
+    var nextElement = focusedElement.nextElementSibling;
+    if (!nextElement) {
+      nextElement = focusedElement.parentNode.firstElementChild;
+    }
+    nextElement.focus();
+    focusedElement = nextElement;
+  }
+  document.addEventListener('keydown', startNavigation);
+  document.addEventListener('keyup', stopNavigation);
+</script>
+
+<div class="lamp"></div>
+
+<script>
+  document.addEventListener("mousemove", function(event) {
+    var lamp = document.querySelector(".lamp");
+    lamp.style.position="absolute";
+    lamp.style.left = event.clientX + window.scrollX+"px";
+    lamp.style.top = event.clientY + window.scrollY+"px";
+  });
+
+  document.addEventListener("mousedown", function (event) {
+    lamp.style.transform = "translate(-100%, -100%) scale(1.2)";
+  });
+
+  document.addEventListener("mouseup", function (event) {
+    lamp.style.transform = "translate(-100%, -100%) scale(1)";
+  });
+</script>
+
+<script>
+  function lightMode() {
+    var element = document.body;
+    element.classList.toggle("light-mode");
+
+    var button = document.querySelector('button[onclick="lightMode()"]');
+  
+    if (element.classList.contains("light-mode")) {
+      button.textContent = "Darkmode";
+    } else {
+      button.textContent = "Lightmode";
+    }
+  }
+</script>
+
+    
+  </body>
+
+</html>

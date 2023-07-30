@@ -1,0 +1,26 @@
+<!-- jQuery UI theme -->
+<link rel="stylesheet" type="text/css" href="external/jquery-ui/jquery-ui.css">
+
+<!-- pinpad CSS -->
+<link rel="stylesheet" type="text/css" href="dist/jquery.ui.pinpad.css">
+
+<!-- external libraries -->
+<script src="external/jquery/jquery.js"></script>
+<script src="external/jquery-ui/jquery-ui.js"></script>
+
+<!-- pinpad widget -->
+<script src="dist/jquery.ui.pinpad.js"></script>
+
+<!-- HTML container for pinpad -->
+<div id="container">
+  <input id="pinpad">
+</div>
+
+<!-- Initialize pinpad -->
+<script>
+$(document).ready(function() {
+    $( "#pinpad" ).pinpad({
+        appendTo: "#container"
+    });
+});
+</script>

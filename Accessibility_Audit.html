@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Project 3</title>
+  <style>
+    img {
+      width: 500px;
+      height: 500px;
+      border-radius: 20px;
+    }
+    .light-mode {
+      background-color: white;
+      color: black;
+  }
+
+  .dark-mode {
+      background-color: black;
+      color: white;
+  }
+    .outlined-text {
+      color: white;
+      text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+    }
+    .outlined-text-inverse {
+      color: black;
+      text-shadow: -1px 0 white, 0 1px white, 1px 0 white, 0 -1px white;
+    }
+          
+      svg {
+        width: 32px;
+        height: 32px;
+        fill: currentColor;
+      }
+
+    nav li a[href="portfoliotesting.html"] {
+      background-color: #0033e2;
+      color: #ffffff;
+      text-decoration: underline;
+      border-radius: 5px
+    }
+    .lighthouse-background {
+      background-size: cover;
+      background-position: center;
+    }
+   .lamp {
+position: absolute;
+z-index: -1;
+border-radius: 25%;
+box-shadow: 0px 0px 75px 75px #00CC66;
+pointer-events: none;
+opacity: 15;
+transition: transform 0.2s ease;
+transform: translate(-100%, -100%) scale(1);
+
+}
+    #cursor {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 2rem;
+      height: 2rem;
+      border-radius: 50%;
+      border: .125rem solid white;
+      pointer-events: none;
+      z-index: 9999;
+      
+    }
+
+    img:hover {
+    
+   
+    }
+
+    a:focus,
+    button:focus {
+      background-color: #00CC66;
+      background: linear-gradient(90deg, #00CC66 0%, #00CC66 100%) !important;
+      border: .125rem solid white;
+    }
+
+
+    .project-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .project-grid {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin: 1.25rem 0;
+    }
+
+    .project-item {
+      margin: 0 1.25rem;
+    }
+
+    body {
+      background-color: #000000;
+      color: #ffffff;
+      font-size: 1rem;
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+
+    .light-mode {
+      background-color: rgb(249, 249, 249);
+      color: rgb(0, 0, 0);
+    }
+
+    header {
+      color: #fff !important;
+      border: unset !important;
+      background: linear-gradient(90deg, #0033e2 0%, #00CC66 100%) !important;
+      padding: .125rem;
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 2.25rem;
+      font-weight: bold;
+      text-align: center;
+      color: #ffffff;
+    }
+
+    nav {
+      float: right;
+    }
+
+    nav ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+
+    nav li {
+      display: inline-block;
+      margin-left: 1.25rem;
+    }
+
+    nav li a {
+      color: #ffffff;
+      text-decoration: none;
+      font-size: 1.25rem;
+      font-weight: bold;
+      text-transform: uppercase;
+      transition: color 0.3s ease;
+    }
+
+    .light-mode nav li a {
+      color: #000000;
+    }
+
+    button {
+      background-color: transparent;
+      border: none;
+      color: #ffffff;
+      text-decoration: none;
+      font-size: 1.25rem;
+      font-weight: bold;
+      text-transform: uppercase;
+      transition: color 0.3s ease;
+      cursor: pointer;
+    }
+
+    .light-mode button {
+      color: #000000;
+    }
+
+    button:hover {
+      background-color: #00CC66;
+      border-radius: 5px; 
+    }
+
+    .container {
+      max-width: 75rem;
+      margin: 0 auto;
+      padding: 1.25rem;
+    }
+
+    .project-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      grid-gap: .313rem;
+      margin-bottom: 2.5rem;
+    }
+
+    .project-grid a {
+      display: flex 1 1 auto;
+      ;
+      background-color: #ffffff;
+      color: #212121;
+      text-decoration: none;
+      padding: 1.25rem;
+      border-radius: .625rem;
+      box-shadow: 0 0 .625rem rgba(0, 0, 0, 0.2);
+      transition: transform 0.3s ease;
+    }
+
+    .project-grid a:hover {
+      background-color: #00CC66;
+      transform: translateY(-.188rem);
+    }
+
+    nav li a:hover {
+      background-color: #00CC66;
+      border-radius: 5px; 
+    }
+
+    footer {
+      color: #fff !important;
+      border: unset !important;
+      margin: 1;
+      padding: 1.0rem !important;
+      background: linear-gradient(90deg, #0033e2 0%, #00CC66 100%) !important;
+      width: 100%;
+      display: block;
+      position: fixed;
+      bottom: 0;
+      left: 0;
+    }
+
+    nav footer a:hover {
+      background-color: #00CC66;
+      border-radius: 5px
+    }
+
+    footer a:hover {
+      color: #00CC66;
+      border-radius: 5px
+    }
+    #buttons {
+      list-style-type: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+    }
+    #buttons li {
+      margin-right: 20px; /* Adjust this value to change the spacing between menu items */
+    }
+  
+    #buttons li:last-child {
+      margin-right: 0;
+    }
+  
+    #buttons a,
+    #buttons button {
+      text-decoration: none;
+      color: inherit;
+    }
+  </style>
+</head>
+
+
+<body>
+  <header>
+    <h1>Accessibility_Audit</h1>
+    <nav role="navigation">
+      <ul id="buttons">
+        <li>
+          <a href="portfoliotesting.html" tabindex="1" accesskey="1" class="outlined-text">Home</a>
+        </li>
+        <li>
+          <a href="About_Me.html" tabindex="2" accesskey="2" class="outlined-text">About</a>
+        </li>
+        <button onclick="lightMode()" tabindex="3" accesskey="3" class="outlined-text">Lightmode</button>
+      </ul>        
+    </nav>
+  </header>
+  <div class="container">
+    <div class="Project">
+      <img src="images/img-5.jpeg" alt="Tab Trace Navigation" class="small-image">
+
+
+      <p>
+        For our project we decided to review the website for the company Arrow Disc Distributions. They are a small business here in Sacramento CA, they are a supplier for the popular rec sport disc golf. They sell discs, apparel, and other accessories needed to play the game.
+       
+        We decided to focus on this website because as a small business they likely don’t have a complete understanding of all accessibility guidelines or best practices. Our overall goal for the audit is to make improvements based on the WCAG AA rating.
+       
+        The URL for the website is: https://arrowdiscs.com/ .</p>
+
+
+        <p>Here are some problems and solutions for the audit:
+
+
+          +No consistent trace path for tab navigation:
+          -Solution: Maintain a simple left to right trace path for tab navigation
+          +Drop-down menus do not work with the Enter key:
+          -Solution: Modify the script to have the parent menu item act as a toggle to drop down the menu
+          +Missing alt text and empty links:
+          -Solution: Add descriptive alt text and link descriptions for screen readers
+          +Low contrast for text:
+          -Solution: Modify the text to be black for better contrast
+          +Suspicious link and redundant links:
+          -Solution: Modify link text to be more descriptive, disable one of the redundant links
+          +Very small text:
+          -Solution: Increase the size of the font to a more readable size
+          +Shopping cart at the bottom of the page is not a link:
+          -Solution: Make the shopping cart a clickable link
+         
+          +Missing heading levels alert:
+          -Solution: Make a list of items using unordered list code
+          Overall, the main goal of the project was to make improvements based on the WCAG AA rating to improve web accessibility.
+        </p>
+    </div>
+    <div id="about" class="container">
+     
+    <script>
+      function lightMode() {
+        var element = document.body;
+        element.classList.toggle("light-mode");
+      }
+      // Get all focusable elements in the form
+      const formElements = document.querySelectorAll('input, button, select, textarea, [tabindex]:not([tabindex="-1"])');
+      // Add a "keydown" event listener to the document
+      document.addEventListener('keydown', event => {
+        // Check if the user pressed the "Tab" key
+        if (event.key === 'Tab') {
+          // Prevent the default tab behavior
+          event.preventDefault();
+          // Get the currently focused element
+          const currentElement = document.activeElement;
+          // Find the index of the currently focused element in the list of form elements
+          const currentIndex = Array.from(formElements).indexOf(currentElement);
+          // Calculate the index of the next element to focus on
+          const nextIndex = (currentIndex + 1) % formElements.length;
+          // Wait for the next event loop cycle to ensure that the element has been fully focused
+          setTimeout(() => {
+            // Focus on the next element
+            formElements[nextIndex].focus();
+          }, 700);
+        }
+      });
+      var delay = 100; // milliseconds
+      var intervalId;
+      var focusedElement;
+
+
+      function startNavigation(event) {
+        if (event.keyCode === 9) { // Tab key
+          clearInterval(intervalId);
+          intervalId = setInterval(navigate, delay);
+          focusedElement = event.target;
+        }
+      }
+
+
+      function stopNavigation(event) {
+        if (event.keyCode === 9) { // Tab key
+          clearInterval(intervalId);
+          focusedElement = null;
+        }
+      }
+
+
+      function navigate() {
+        var nextElement = focusedElement.nextElementSibling;
+        if (!nextElement) {
+          nextElement = focusedElement.parentNode.firstElementChild;
+        }
+        nextElement.focus();
+        focusedElement = nextElement;
+      }
+      document.addEventListener('keydown', startNavigation);
+      document.addEventListener('keyup', stopNavigation);
+    </script>
+     <div class="lamp"></div>
+     <script>
+       document.addEventListener("mousemove", function(event) {
+         var lamp = document.querySelector(".lamp");
+         lamp.style.position="absolute"; //Ensures that the lamp is positioned correctly
+         lamp.style.left = event.clientX + window.scrollX+"px";
+         lamp.style.top = event.clientY + window.scrollY+"px";
+        });
+        document.addEventListener("mousedown", function (event) {
+          lamp.style.transform = "translate(-100%, -100%) scale(1.2)";
+        });
+      
+        document.addEventListener("mouseup", function (event) {
+          lamp.style.transform = "translate(-100%, -100%) scale(1)";
+        });
+      
+     </script>
+     <script>
+      function lightMode() {
+      var element = document.body;
+      element.classList.toggle("light-mode");
+  
+      // Get the button element
+      var button = document.querySelector('button[onclick="lightMode()"]');
+  
+      // Toggle the button text based on the current mode
+      if (element.classList.contains("light-mode")) {
+          button.textContent = "Darkmode";
+      } else {
+          button.textContent = "Lightmode";
+      }
+  }
+  </script>
+</body>
+<footer></footer>
+</html>

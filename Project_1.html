@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Project 1</title>
+  <style>
+    img {
+      width: 300px;
+      height: 300px;
+      border-radius: 20px;
+    }
+    .light-mode {
+      background-color: white;
+      color: black;
+  }
+
+  .dark-mode {
+      background-color: black;
+      color: white;
+  }
+    .outlined-text {
+      color: white;
+      text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+    }
+    .outlined-text-inverse {
+      color: black;
+      text-shadow: -1px 0 white, 0 1px white, 1px 0 white, 0 -1px white;
+    }
+          
+      svg {
+        width: 32px;
+        height: 32px;
+        fill: currentColor;
+      }
+
+    nav li a[href="portfoliotesting.html"] {
+      background-color: #0033e2;
+      color: #ffffff;
+      text-decoration: underline;
+      border-radius: 5px
+    }
+    .lighthouse-background {
+      background-size: cover;
+      background-position: center;
+    }
+  
+    .first-image {
+      background-image: url('path/to/your/first-image.png');
+    }
+  
+    .second-image {
+      background-image: url('path/to/your/second-image.png');
+    }
+    
+   .lamp {
+position: absolute;
+z-index: -1;
+border-radius: 25%;
+box-shadow: 0px 0px 75px 75px #00CC66;
+pointer-events: none;
+opacity: 15;
+transition: transform 0.2s ease;
+transform: translate(-100%, -100%) scale(1);
+
+}
+    #cursor {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 2rem;
+      height: 2rem;
+      border-radius: 50%;
+      border: .125rem solid white;
+      pointer-events: none;
+      z-index: 9999;
+      
+    }
+
+    img:hover {
+    
+   
+    }
+
+    a:focus,
+    button:focus {
+      background-color: #00CC66;
+      background: linear-gradient(90deg, #00CC66 0%, #00CC66 100%) !important;
+      border: .125rem solid white;
+    }
+
+
+    .project-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .project-grid {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin: 1.25rem 0;
+    }
+
+    .project-item {
+      margin: 0 1.25rem;
+    }
+
+    body {
+      background-color: #000000;
+      color: #ffffff;
+      font-size: 1rem;
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+
+    .light-mode {
+      background-color: rgb(249, 249, 249);
+      color: rgb(0, 0, 0);
+    }
+
+    header {
+      color: #fff !important;
+      border: unset !important;
+      background: linear-gradient(90deg, #0033e2 0%, #00CC66 100%) !important;
+      padding: .125rem;
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 2.25rem;
+      font-weight: bold;
+      text-align: center;
+      color: #ffffff;
+    }
+
+    nav {
+      float: right;
+    }
+
+    nav ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+
+    nav li {
+      display: inline-block;
+      margin-left: 1.25rem;
+    }
+
+    nav li a {
+      color: #ffffff;
+      text-decoration: none;
+      font-size: 1.25rem;
+      font-weight: bold;
+      text-transform: uppercase;
+      transition: color 0.3s ease;
+    }
+
+    .light-mode nav li a {
+      color: #000000;
+    }
+
+    button {
+      background-color: transparent;
+      border: none;
+      color: #ffffff;
+      text-decoration: none;
+      font-size: 1.25rem;
+      font-weight: bold;
+      text-transform: uppercase;
+      transition: color 0.3s ease;
+      cursor: pointer;
+    }
+
+    .light-mode button {
+      color: #000000;
+    }
+
+    button:hover {
+      background-color: #00CC66;
+      border-radius: 5px; 
+    }
+
+    .container {
+      max-width: 75rem;
+      margin: 0 auto;
+      padding: 1.25rem;
+    }
+
+    .project-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      grid-gap: .313rem;
+      margin-bottom: 2.5rem;
+    }
+
+    .project-grid a {
+      display: flex 1 1 auto;
+      ;
+      background-color: #ffffff;
+      color: #212121;
+      text-decoration: none;
+      padding: 1.25rem;
+      border-radius: .625rem;
+      box-shadow: 0 0 .625rem rgba(0, 0, 0, 0.2);
+      transition: transform 0.3s ease;
+    }
+
+    .project-grid a:hover {
+      background-color: #00CC66;
+      transform: translateY(-.188rem);
+    }
+
+    nav li a:hover {
+      background-color: #00CC66;
+      border-radius: 5px; 
+    }
+
+    footer {
+      color: #fff !important;
+      border: unset !important;
+      margin: 1;
+      padding: 1.0rem !important;
+      background: linear-gradient(90deg, #0033e2 0%, #00CC66 100%) !important;
+      width: 100%;
+      display: block;
+      position: fixed;
+      bottom: 0;
+      left: 0;
+    }
+
+    nav footer a:hover {
+      background-color: #00CC66;
+      border-radius: 5px
+    }
+
+    footer a:hover {
+      color: #00CC66;
+      border-radius: 5px
+    }
+    #buttons {
+      list-style-type: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+    }
+    #buttons li {
+      margin-right: 20px; /* Adjust this value to change the spacing between menu items */
+    }
+  
+    #buttons li:last-child {
+      margin-right: 0;
+    }
+  
+    #buttons a,
+    #buttons button {
+      text-decoration: none;
+      color: inherit;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Project 1-Door Unlock Shortcut</h1>
+    <nav role="navigation">
+      <ul id="buttons">
+        <li>
+          <a href="portfoliotesting.html" tabindex="1" accesskey="1" class="outlined-text">Home</a>
+        </li>
+        <li>
+          <a href="About_Me.html" tabindex="2" accesskey="2" class="outlined-text">About</a>
+        </li>
+        <button onclick="lightMode()" tabindex="3" accesskey="3" class="outlined-text">Lightmode</button>
+      </ul>        
+    </nav>
+  </header>
+  <div class="container">
+    <div class="about-me">
+      <img src="images/img-4.jpeg" alt="The Button"class="small-image">
+
+
+
+      <img src="images/img-7.jpeg" alt="The Door"class="small-image-2">
+      <p>
+        <h1>The Problem</h1>
+        <p>The issue we encountered stemmed from the implementation of new security measures due to Covid, which necessitated additional time for us to access the computer and unlock the door.</p>
+       
+        <h2>The Solution:</h2>
+        <p>Our implementation of the door unlock system has alleviated time and fatigue for individuals who require frequent access to the door. The system has also helped our efficiency by providing a more time-effective method of access.</p>
+
+
+        <p>Our development of the door unlocking mechanism via remote has successfully saved users time when opening the door for people entering the office. This solution has not only reduced the strain on individuals who need to frequently access the door, but also improved our overall efficiency by offering a more time-efficient means of entry.</p>
+        <script>
+          function lightMode() {
+            var element = document.body;
+            element.classList.toggle("light-mode");
+          }
+          // Get all focusable elements in the form
+          const formElements = document.querySelectorAll('input, button, select, textarea, [tabindex]:not([tabindex="-1"])');
+          // Add a "keydown" event listener to the document
+          document.addEventListener('keydown', event => {
+            // Check if the user pressed the "Tab" key
+            if (event.key === 'Tab') {
+              // Prevent the default tab behavior
+              event.preventDefault();
+              // Get the currently focused element
+              const currentElement = document.activeElement;
+              // Find the index of the currently focused element in the list of form elements
+              const currentIndex = Array.from(formElements).indexOf(currentElement);
+              // Calculate the index of the next element to focus on
+              const nextIndex = (currentIndex + 1) % formElements.length;
+              // Wait for the next event loop cycle to ensure that the element has been fully focused
+              setTimeout(() => {
+                // Focus on the next element
+                formElements[nextIndex].focus();
+              }, 700);
+            }
+          });
+          var delay = 100; // milliseconds
+          var intervalId;
+          var focusedElement;
+
+
+          function startNavigation(event) {
+            if (event.keyCode === 9) { // Tab key
+              clearInterval(intervalId);
+              intervalId = setInterval(navigate, delay);
+              focusedElement = event.target;
+            }
+          }
+
+
+          function stopNavigation(event) {
+            if (event.keyCode === 9) { // Tab key
+              clearInterval(intervalId);
+              focusedElement = null;
+            }
+          }
+
+
+          function navigate() {
+            var nextElement = focusedElement.nextElementSibling;
+            if (!nextElement) {
+              nextElement = focusedElement.parentNode.firstElementChild;
+            }
+            nextElement.focus();
+            focusedElement = nextElement;
+          }
+          document.addEventListener('keydown', startNavigation);
+          document.addEventListener('keyup', stopNavigation);
+        </script>
+         <div class="lamp"></div>
+         <script>
+           document.addEventListener("mousemove", function(event) {
+             var lamp = document.querySelector(".lamp");
+             lamp.style.position="absolute"; //Ensure that the lamp is positioned correctly
+             lamp.style.left = event.clientX + window.scrollX+"px";
+             lamp.style.top = event.clientY + window.scrollY+"px";
+            });
+            document.addEventListener("mousedown", function (event) {
+              lamp.style.transform = "translate(-100%, -100%) scale(1.2)";
+            });
+          
+            document.addEventListener("mouseup", function (event) {
+              lamp.style.transform = "translate(-100%, -100%) scale(1)";
+            });
+           
+         </script>
+  </body>
+  <footer></footer>
+</html>

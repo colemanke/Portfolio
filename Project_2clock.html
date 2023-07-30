@@ -1,0 +1,334 @@
+<html lang="en">
+  <link rel="stylesheet" type="text/css" href="project2CSS.css">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project 2</title>
+    <style>  </style>
+    
+</head>
+<header role="banner">
+    <h1>Project 2-Hand Detection to Announce Time</h1>
+    <nav role="navigation">
+      <nav role="navigation">
+        <ul id="buttons">
+          <li>
+            <a href="portfoliotesting.html" tabindex="1" accesskey="1" class="outlined-text">Home</a>
+          </li>
+          <li>
+            <a href="About_Me.html" tabindex="2" accesskey="2" class="outlined-text">About</a>
+          </li>
+          <button onclick="lightMode()" tabindex="3" accesskey="3" class="outlined-text">Lightmode</button>
+        </ul>        
+    </nav>
+  </header>
+<body>
+   
+  <div class="about-me">
+    <p>
+      <br>
+      This hand detection camera program utilizes TensorFlow and Handpose for real-time hand gesture recognition in a web browser. The project involves setting up a webpage, accessing the user's webcam, and loading the Handpose model for hand detection and gesture recognition. By processing the video feed and recognizing specific hand gestures, the program announces the current time using a speech synthesis engine. The webpage is updated with the recognized gesture and time, providing an interactive and accessible solution for users to know the time without a clock or watch, benefiting visually impaired individuals or those in situations where traditional time-checking is inconvenient.</p>
+      <br>
+    </p>
+    <p>
+        Problems:
+        -Visually impaired or individuals with motor impairments may have difficulty knowing the time through traditional methods.  
+        -Existing solutions might not be as interactive and user-friendly.
+      </p>
+      <p>
+        Solutions:
+        -Using Tensorflow and Handpose to recognize user's hand gestures as an input method for an accessible time announcement system.
+        -Incorporating a speech engine to announce the time, making it convenient for users with various impairments.
+    </p>
+</div>
+<div id="custom-modal">
+    <div class="modal-content">
+      <h2>Welcome!</h2>
+      <p>Please follow these instructions to use the time announcement program:</p>
+      <ol>
+        <li>Click "Allow Camera Access" to activate the camera.</li>
+        <li>Wait for the camera feed to start.</li>
+        <li>Hold your hand in front of the camera to get the time announced (make sure the volume is on).</li>
+      </ol>
+      <button id="allow-camera-access" onclick="requestCameraAccess()">Allow Camera Access</button>
+    </div>
+  </div>
+  <!-- The toggle cover button -->
+  <button onclick="toggleCover()">Toggle cover</button>
+  
+  <!-- The parent div -->
+  <div style="position: relative; width: 640px; height: 480px;">
+  
+    <!-- The cover div -->
+    <div id="cover" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-color: black; z-index: 2; display: none;"></div>
+  
+    <!-- The video element -->
+    <video id="video" width="640" height="480" autoplay style="display: none;"></video>
+  
+    <!-- The canvas element -->
+    <canvas id="canvas" width="640" height="480"></canvas>
+  
+  </div>
+  
+  <!-- The rest of your code... -->
+  
+  
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@latest/dist/tf.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/handpose"></script>
+    <script>
+      const video = document.getElementById("video");
+      const canvas = document.getElementById("canvas");
+      const ctx = canvas.getContext("2d");
+  
+      async function setupCamera() {
+          const stream = await navigator.mediaDevices.getUserMedia({
+              video: { width: 640, height: 480 },
+              audio: false,
+          });
+  
+          video.srcObject = stream;
+          video.play();
+  
+          return new Promise((resolve) => {
+              video.onloadedmetadata = () => {
+                  document.getElementById("custom-modal").style.display = "none";
+                  resolve(video);
+              };
+          });
+      }
+  
+      let lastAnnouncementTime = null;
+      const announcementDelay = 7500; // Time in milliseconds between announcements (5 seconds)
+  
+      async function detectHands(model) {
+          ctx.drawImage(video, 0, 0, video.videoWidth, video.videoHeight);
+  
+          const predictions = await model.estimateHands(video);
+          if (predictions.length > 0) {
+              for (let i = 0; i < predictions.length; i++) {
+                  const keypoints = predictions[i].landmarks;
+                  const boundingBox = predictions[i].boundingBox;
+  
+                  // Check if the hand is near the center of the frame
+                  const centerX = canvas.width / 2;
+                  const centerY = canvas.height / 2;
+                  const distanceFromCenter = Math.sqrt(Math.pow(centerX - boundingBox.topLeft[0], 2) + Math.pow(centerY - boundingBox.topLeft[1], 2));
+                  if (distanceFromCenter > canvas.width / 5) {
+                      continue; // Ignore the hand if it's too far from the center
+                  }
+  
+                  for (let j = 0; j < keypoints.length; j++) {
+                      ctx.fillStyle = "red";
+                      ctx.fillRect(keypoints[j][0], keypoints[j][1], 5, 5);
+                  }
+              }
+  
+              const currentTime = new Date().toLocaleTimeString();
+              ctx.font = "bold 50px Arial";
+              ctx.fillStyle = "red";
+              ctx.fillText(currentTime, 10, 40);
+              // Cache fillStyle and font
+              const handKeyPointFillStyle = "red";
+              const timeTextFont = "bold 50px Arial";
+              ctx.fillStyle = handKeyPointFillStyle;
+              ctx.font = timeTextFont;
+  
+              const currentTimeMillis = new Date().getTime();
+              if (
+                  lastAnnouncementTime === null ||
+                  currentTimeMillis - lastAnnouncementTime >= announcementDelay
+              ) {
+                  const utterance = new SpeechSynthesisUtterance(`The time is ${currentTime}`);
+                  window.speechSynthesis.speak(utterance);
+                  lastAnnouncementTime = currentTimeMillis;
+              }
+          }
+  
+          requestAnimationFrame(() => detectHands(model));
+      }
+  
+      async function main() {
+          await setupCamera();
+          const model = await handpose.load();
+          requestAnimationFrame(() => detectHands(model));
+      }
+  
+      main();
+
+        
+
+        async function main() {
+            await setupCamera();
+            const model = await handpose.load();
+            detectHands(model);
+        }
+
+        main();
+    </script>
+    <script>
+        async function requestCameraAccess() {
+          try {
+            await setupCamera();
+            const model = await handpose.load();
+            detectHands(model);
+          } catch (error) {
+            console.error("Error accessing the camera:", error);
+            // You can add a message to inform the user about the error
+          }
+        }
+      </script>
+    <script>
+        function lightMode() {
+          var element = document.body;
+          element.classList.toggle("light-mode");
+        }
+        // Get all focusable elements in the form
+        const formElements = document.querySelectorAll('input, button, select, textarea, [tabindex]:not([tabindex="-1"])');
+        // Add a "keydown" event listener to the document
+        document.addEventListener('keydown', event => {
+          // Check if the user pressed the "Tab" key
+          if (event.key === 'Tab') {
+            // Prevent the default tab behavior
+            event.preventDefault();
+            // Get the currently focused element
+            const currentElement = document.activeElement;
+            // Find the index of the currently focused element in the list of form elements
+            const currentIndex = Array.from(formElements).indexOf(currentElement);
+            // Calculate the index of the next element to focus on
+            const nextIndex = (currentIndex + 1) % formElements.length;
+            // Wait for the next event loop cycle to ensure that the element has been fully focused
+            setTimeout(() => {
+              // Focus on the next element
+              formElements[nextIndex].focus();
+            }, 700);
+          }
+            // Check if the key is '1' and not in an input or textarea
+            if (event.key === "1" && event.target.tagName !== "INPUT" && event.target.tagName !== "TEXTAREA") {
+              event.preventDefault(); // Prevent any default behavior
+              document.getElementById("home-link").click(); // Trigger the click event for the "Home" link
+            }
+            // Check if the key is '2' and not in an input or textarea
+            if (event.key === "2" && event.target.tagName !== "INPUT" && event.target.tagName !== "TEXTAREA") {
+              event.preventDefault(); // Prevent any default behavior
+              document.getElementById("about-link").click(); // Trigger the click event for the "About Me" link
+            }
+        });
+        var delay = 50; // milliseconds
+        var intervalId;
+        var focusedElement;
+
+        function startNavigation(event) {
+          if (event.keyCode === 9) { // Tab key
+            clearInterval(intervalId);
+            intervalId = setInterval(navigate, delay);
+            focusedElement = event.target;
+          }
+        }
+
+        function stopNavigation(event) {
+          if (event.keyCode === 9) { // Tab key
+            clearInterval(intervalId);
+            focusedElement = null;
+          }
+        }
+
+        function navigate() {
+          var nextElement = focusedElement.nextElementSibling;
+          if (!nextElement) {
+            nextElement = focusedElement.parentNode.firstElementChild;
+          }
+          nextElement.focus();
+          focusedElement = nextElement;
+        }
+        document.addEventListener('keydown', startNavigation);
+        document.addEventListener('keyup', stopNavigation);
+      </script>
+      <div class="lamp"></div>
+      <script>
+var lamp = document.querySelector(".lamp");
+lamp.style.position="absolute" //Ensures that the lamp is positioned correctly
+
+document.addEventListener("mouseover", function(event) {
+  lamp.style.display = "block";
+});
+
+document.addEventListener("mouseout", function(event) {
+  lamp.style.display = "none";
+});
+
+document.addEventListener("mousemove", function(event) {
+  if (lamp.style.display === "block") {
+    lamp.style.left = event.clientX + window.scrollX+"px";
+    lamp.style.top = event.clientY + window.scrollY+"px";
+  }
+  document.addEventListener("mousedown", function (event) {
+    lamp.style.transform = "translate(-100%, -100%) scale(1.2)";
+  });
+
+  document.addEventListener("mouseup", function (event) {
+    lamp.style.transform = "translate(-100%, -100%) scale(1)";
+  });
+
+});
+</script>
+<script>
+  const url = 'portfoliotesting.html'; // Replace this with the desired URL
+
+  document.addEventListener('keydown', function(event) {
+      if (event.key === '1') {
+          window.location.href = url;
+      }
+      const url = 'About_Me.html'; // Replace this with the desired URL
+    })
+  document.addEventListener('keydown', function(event) {
+      if (event.key === '2') {
+          window.location.href = url;
+      }
+      const url = 'About_Me.html'; // Replace this with the desired URL
+
+      function lightMode() {
+        const body = document.body;
+        body.classList.toggle('lightmode');
+    }
+    })
+    document.addEventListener('keydown', function(event) {
+        if (event.key === '3') {
+            lightMode();
+        }
+  });
+</script>
+       <script>
+        function lightMode() {
+        var element = document.body;
+        element.classList.toggle("light-mode");
+    
+        // Get the button element
+        var button = document.querySelector('button[onclick="lightMode()"]');
+    
+        // Toggle the button text based on the current mode
+        if (element.classList.contains("light-mode")) {
+            button.textContent = "Darkmode";
+        } else {
+            button.textContent = "Lightmode";
+        }
+    }
+    </script>
+    <script>
+      if (!('WebGLRenderingContext' in window) || !WebGLRenderingContext) {
+        document.getElementById('webgl-warning').style.display = 'block';
+      } else {
+        // Run the rest of your JavaScript code
+      }
+    </script>
+    <script>function toggleCover() {
+      var cover = document.getElementById('cover');
+      if (cover.style.display === 'none') {
+        cover.style.display = 'block';
+      } else {
+        cover.style.display = 'none';
+      }
+    }
+    </script>
+</body>
+</html>
